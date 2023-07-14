@@ -2,7 +2,7 @@ import * as emoji from 'node-emoji';
 
 (function (global) {
     function replaceEmoji(sentence) {
-        return sentence.split(' ').map((word) => emoji.has(word) ? emoji.get(word) : word).join('');
+        return sentence.split(' ').map((word) => emoji.has(word) ? emoji.get(word) : word).join(' ');
     }
 
     global.emojify = emoji.emojify;
