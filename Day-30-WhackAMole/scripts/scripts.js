@@ -6,6 +6,7 @@ const startBtn = document.querySelector('button.start');
 let lastHole;
 let score = 0;
 let timeUp = false;
+let audio;
 
 function randomTime(min, max) {
   return Math.round(Math.random() * (max - min) + min);
@@ -36,6 +37,8 @@ function peep(e) {
 function bonk(e) {
   if (!e.isTrusted) return;
   score++;
+  audio.currentTime = 0;
+  audio.play();
   this.parentNode.classList.remove('up');
   scoreBoard.textContent = score;
 }
@@ -62,4 +65,11 @@ function startGame() {
   }, 10 * 1000);
 }
 
+function onLoad() {
+  audio = document.createElement('audio');
+  audio.src = './assets/whack.mp3'
+  document.body.appendChild(audio);
+}
+
 moles.forEach(mole => mole.addEventListener('click', bonk));
+window.addEventListener('load', onLoad);
